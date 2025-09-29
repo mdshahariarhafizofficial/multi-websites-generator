@@ -1,16 +1,80 @@
-# React + Vite
+# CSV-Based Auto React Apps Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+description: >
+  এই project-এর উদ্দেশ্য হলো `websites.csv` ফাইল থেকে স্বয়ংক্রিয়ভাবে
+  Vite React apps তৈরি করা, যেখানে প্রতিটি app-এর Hero এবং Contact section
+  CSV অনুযায়ী auto generate হবে।
 
-Currently, two official plugins are available:
+project_structure:
+  - generate.js: "Node.js script যা CSV পড়ে প্রতিটি app তৈরি করে এবং Hero + Contact components auto generate করে।"
+  - websites.csv: "আপনার data source, প্রতিটি row অনুযায়ী একটি app তৈরি হবে।"
+  - build/: "generated apps-এর folder।"
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+csv_format: |
+  domain,title,description,phone,address
+  foodexpress.com,Food Express,Delicious meals delivered fast,01712345678,"House 12, Road 5, Banani, Dhaka"
+  techhubbd.com,Tech Hub BD,Your trusted tech partner,01898765432,"Level 4, Block B, Dhanmondi, Dhaka"
+  bookbazaar.com,Book Bazaar,Buy and sell books online,01911223344,"Shop 22, New Market, Chittagong"
 
-## React Compiler
+csv_rules:
+  - "প্রতিটি row → একটি React app"
+  - "domain → app folder name"
+  - "phone এবং address → Contact component"
+  - "Hero text fixed template: [[ Quick | Fast | Speedy ]] delivery service in Dhaka. (script auto replace করবে Quick)"
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+prerequisites:
+  - Node.js (v18+ recommended)
+  - npm
+  - Internet connection (Vite app create + npm install এর জন্য)
 
-## Expanding the ESLint configuration
+setup_installation:
+  steps:
+    - "Project clone বা zip extract করুন।"
+    - "Project root-এ থাকাকালীন websites.csv এবং generate.js আছে তা নিশ্চিত করুন।"
+    - "CSV parser install করুন:"
+    - "npm install csv-parser"
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+generate_apps:
+  steps:
+    - "node generate.js"
+    - "নতুন apps → build/ folder-এ create হবে"
+    - "যদি folder already থাকে → Hero + Contact overwrite হবে"
+    - "সব app Hero + Contact centered, white text, black background"
+  output_example: |
+    /build
+       /foodexpress.com
+       /techhubbd.com
+       /bookbazaar.com
+
+run_individual_app:
+  steps:
+    - "cd build/foodexpress.com"
+    - "npm run dev"
+    - "Browser open হবে local server (default: http://localhost:5173)"
+    - "Hero + Contact centered দেখাবে"
+
+app_structure_generated:
+  src:
+    - App.jsx: "Main app wrapper, flex centered"
+    - Hero.jsx: "Hero section, centered, white text"
+    - Contact.jsx: "Contact section, centered, white text"
+    - index.css: "Overrides Vite default body flex"
+
+notes:
+  - "নতুন CSV row add করলে আবার node generate.js চালান → নতুন app generate হবে।"
+  - "সব apps independent, একে অন্যের সাথে interfere করবে না।"
+  - "Inline styles ব্যবহার করা হয়েছে, কোনো extra CSS change দরকার নেই।"
+
+troubleshooting:
+  vite_create_fail:
+    - "নিশ্চিত করুন Node.js + npm installed"
+    - "ইন্টারনেট connection ঠিক আছে"
+  apps_not_centered:
+    - "App.jsx wrapper inline style check করুন"
+    - "index.css auto overwrite হয় generate.js-এ"
+
+👨‍💻 Developer Info
+Name: Md. Shahariar Hafiz
+Email: shahariar.works@gmail.com
+Portfolio: https://shahariar-hafiz.netlify.app/
+LinkedIn: devshahariarhafiz
