@@ -4,7 +4,7 @@
 এই project-এর উদ্দেশ্য হলো `websites.csv` ফাইল থেকে স্বয়ংক্রিয়ভাবে **Vite React apps** তৈরি করা, যেখানে প্রতিটি app-এর Hero এবং Contact section CSV অনুযায়ী auto generate হবে।
 
 ## Project Structure
-
+```text
 project-root/
 │
 ├─ generate.js      # Node.js script যা CSV পড়ে প্রতিটি app তৈরি করে এবং Hero + Contact components auto generate করে
@@ -12,14 +12,19 @@ project-root/
 ├─ package.json     # Project dependencies এবং scripts
 └─ build/           # Generated apps-এর folder
 
+```
+
+
 ## CSV Format
 
 `websites.csv` structure:
 
+```text
 domain,title,description,phone,address
 foodexpress.com,Food Express,Delicious meals delivered fast,01712345678,"House 12, Road 5, Banani, Dhaka"
 techhubbd.com,Tech Hub BD,Your trusted tech partner,01898765432,"Level 4, Block B, Dhanmondi, Dhaka"
 bookbazaar.com,Book Bazaar,Buy and sell books online,01911223344,"Shop 22, New Market, Chittagong"
+```
 
 ## Rules
 
@@ -55,10 +60,12 @@ node generate.js
 
 ### Output Example
 
+```text
 /build
    /foodexpress.com
    /techhubbd.com
    /bookbazaar.com
+```
 
 ## Run Individual App
 
@@ -74,12 +81,14 @@ npm run dev
 
 ## App Structure (Generated)
 
+```text
 src/
 │
 ├─ App.jsx       # Main app wrapper, flex centered
 ├─ Hero.jsx      # Hero section, centered, white text
 ├─ Contact.jsx   # Contact section, centered, white text
 └─ index.css     # Overrides Vite default body flex
+```
 
 ## Notes
 
